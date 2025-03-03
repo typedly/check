@@ -16,6 +16,7 @@ A **lightweight TypeScript** type definitions library for type comparison.
 
 ## Table of contents
 
+- [Definitions](#definitions)
 - [Installation](#installation)
 - [Api](#api)
   - Type
@@ -35,26 +36,6 @@ A **lightweight TypeScript** type definitions library for type comparison.
   - [Commit](#commit)
   - [Versioning](#versioning)
 - [License](#license)
-
-## Installation
-
-```bash
-npm install @typedly/check --save-peer
-```
-
-## Api
-
-```typescript
-import {
-  Assignable, DistributiveAssignable, Inclusion,
-  Compatible, StrictAssignable, StructuralAssignable,
-  Equal, DistributiveEqual,
-  Mutual, BooleanDistributiveEqual,
-  Same, StrictlySame,
-  StrictEqual, StructuralEqual,
-  StrictMutual, MutualAssignable,
-} from '@typedly/check';
-```
 
 ### Definitions
 
@@ -95,6 +76,26 @@ Example:
 > [!NOTE]
 > It seems TypeScript's type system currently doesn't support full strict object equality (including key order) directly.
 > If you're working with objects, you can check for strict structure, but not necessarily key order or exact value assignment without additional constraints or custom logic.
+
+## Installation
+
+```bash
+npm install @typedly/check --save-peer
+```
+
+## Api
+
+```typescript
+import {
+  Assignable, DistributiveAssignable, Inclusion,
+  Compatible, StrictAssignable, StructuralAssignable,
+  Equal, DistributiveEqual,
+  Mutual, BooleanDistributiveEqual,
+  Same, StrictlySame,
+  StrictEqual, StructuralEqual,
+  StrictMutual, MutualAssignable,
+} from '@typedly/check';
+```
 
 ### `Assignable`
 

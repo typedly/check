@@ -1,3 +1,4 @@
+// Type.
 import { Mutual } from "../lib";
 
 // Examples.
@@ -5,8 +6,12 @@ import { Mutual } from "../lib";
 export type UnionExample1 = Mutual<"a" | "b", "a">;  // false
 export type UnionExample2 = Mutual<'a' | 'b', 'b' | 'a'>; // true
 export type UnionExample3 = Mutual<'a' | 'b', 'a' | 'b'>; // true
+
 export type UnionExample4 = Mutual<string | number, number | string>; // true
 export type UnionExample5 = Mutual<number | string, number | string>; // true
+
+export type UnionExample6 = Mutual<boolean, true | false>; // true
+export type UnionExample7 = Mutual<true | false, boolean>; // true
 
 // Array.
 export type ArrayExample1 = Mutual<[1, 2], number[]>;  // false
@@ -18,8 +23,21 @@ export type TupleExample2 = Mutual<[string, number], [string, number]>; // true
 export type TupleExample3 = Mutual<[string, number], [string, number, boolean]>; // false
 
 // Primitive.
+// number
 export type PrimitiveExample1 = Mutual<1, number>;  // false
-export type PrimitiveExample2 = Mutual<'a', string>;  // false
+export type PrimitiveExample2 = Mutual<number, 1>;  // false
+// string
+export type PrimitiveExample3 = Mutual<'a', string>;  // false
+export type PrimitiveExample4 = Mutual<string, 'a'>;  // false
+// boolean
+export type PrimitiveExample5 = Mutual<true, boolean>; // boolean - CHECK
+export type PrimitiveExample6 = Mutual<boolean, true>; // false
+
+export type PrimitiveExample7 = Mutual<number, string>; // false
+export type PrimitiveExample8 = Mutual<any, number> // false
+export type PrimitiveExample9 = Mutual<number, any> // boolean - CHECK
+export type PrimitiveExample10 = Mutual<never, number> // false
+export type PrimitiveExample11 = Mutual<number, never> // false
 
 // Primitives with Arrays.
 export type PrimitiveArrayExample1 = Mutual<number[], number[]>;  // true
@@ -28,10 +46,16 @@ export type PrimitiveArrayExample2 = Mutual<number[], string[]>;  // false
 // Object.
 export type ObjectExample1 = Mutual<{ name: string }, { name: string }>; // true
 export type ObjectExample2 = Mutual<{ name: string }, { age: number }>; // false
+
 export type ObjectExample3 = Mutual<{ name: string }, { name: string; age: number }>; // false
-export type ObjectExample4 = Mutual<{a:number, b:string}, {b:string, a:number}>; // true
-export type ObjectExample5 = Mutual<{a:number, b:string}, {b:string, a:number}>; // true
-export type ObjectExample6 = Mutual<{a:number, b:string}, {b:string, a:number}>; // true
+export type ObjectExample4 = Mutual<{ name: string; age: number }, { name: string }>; // false
+
+export type ObjectExample5 = Mutual<{a:number, b:string}, {b:string, a:number}>; // Differ order: true
+export type ObjectExample6 = Mutual<{b:string, a:number}, {b:string, a:number}>; // Same order: true
+
+export type ObjectExample7 = Mutual<{ a: number }, { a: number; b: string }>; // false
+export type ObjectExample8 = Mutual<{ a: number; b: string }, { a: number }>; // false
+export type ObjectExample9 = Mutual<{ a: number; b: string }, { b: string }>; // false
 
 // Nested Objects.
 export type NestedObjectExample1 = Mutual<{ user: { name: string } }, { user: { name: string } }>; // true

@@ -5,8 +5,12 @@ import { Same } from "../lib";
 export type UnionExample1 = Same<"a" | "b", "a">;  // false
 export type UnionExample2 = Same<'a' | 'b', 'b' | 'a'>; // true
 export type UnionExample3 = Same<'a' | 'b', 'a' | 'b'>; // true
+
 export type UnionExample4 = Same<string | number, number | string>; // true
 export type UnionExample5 = Same<number | string, number | string>; // true
+
+export type UnionExample6 = Same<boolean, true | false>; // true
+export type UnionExample7 = Same<true | false, boolean>; // true
 
 // Array.
 export type ArrayExample1 = Same<[1, 2], number[]>;  // false
@@ -18,8 +22,21 @@ export type TupleExample2 = Same<[string, number], [string, number]>; // true
 export type TupleExample3 = Same<[string, number], [string, number, boolean]>; // false
 
 // Primitive.
+// number
 export type PrimitiveExample1 = Same<1, number>;  // false
-export type PrimitiveExample2 = Same<'a', string>;  // false
+export type PrimitiveExample2 = Same<number, 1>;  // false
+// string
+export type PrimitiveExample3 = Same<'a', string>;  // false
+export type PrimitiveExample4 = Same<string, 'a'>;  // false
+// boolean
+export type PrimitiveExample5 = Same<true, boolean>; // false
+export type PrimitiveExample6 = Same<boolean, true>; // false
+
+export type PrimitiveExample7 = Same<number, string>; // false
+export type PrimitiveExample8 = Same<any, number> // false
+export type PrimitiveExample9 = Same<number, any> // false
+export type PrimitiveExample10 = Same<never, number> // false
+export type PrimitiveExample11 = Same<number, never> // false
 
 // Primitives with Arrays.
 export type PrimitiveArrayExample1 = Same<number[], number[]>;  // true
@@ -28,10 +45,16 @@ export type PrimitiveArrayExample2 = Same<number[], string[]>;  // false
 // Object.
 export type ObjectExample1 = Same<{ name: string }, { name: string }>; // true
 export type ObjectExample2 = Same<{ name: string }, { age: number }>; // false
+
 export type ObjectExample3 = Same<{ name: string }, { name: string; age: number }>; // false
-export type ObjectExample4 = Same<{a:number, b:string}, {b:string, a:number}>; // true
-export type ObjectExample5 = Same<{a:number, b:string}, {b:string, a:number}>; // true
-export type ObjectExample6 = Same<{a:number, b:string}, {b:string, a:number}>; // true
+export type ObjectExample4 = Same<{ name: string; age: number }, { name: string }>; // false
+
+export type ObjectExample5 = Same<{a:number, b:string}, {b:string, a:number}>; // Differ order: true
+export type ObjectExample6 = Same<{b:string, a:number}, {b:string, a:number}>; // Same order: true
+
+export type ObjectExample7 = Same<{ a: number }, { a: number; b: string }>; // false
+export type ObjectExample8 = Same<{ a: number; b: string }, { a: number }>; // false
+export type ObjectExample9 = Same<{ a: number; b: string }, { b: string }>; // false
 
 // Nested Objects.
 export type NestedObjectExample1 = Same<{ user: { name: string } }, { user: { name: string } }>; // true

@@ -5,8 +5,13 @@ import { Assignable } from "../lib";
 export type UnionExample1 = Assignable<"a" | "b", "a">;  // boolean
 export type UnionExample2 = Assignable<'a' | 'b', 'b' | 'a'>; // true
 export type UnionExample3 = Assignable<'a' | 'b', 'a' | 'b'>; // true
+
 export type UnionExample4 = Assignable<string | number, number | string>; // true
 export type UnionExample5 = Assignable<number | string, number | string>; // true
+
+export type UnionExample6 = Assignable<boolean, true | false>; // true
+export type UnionExample7 = Assignable<true | false, boolean>; // true
+
 
 // Array.
 export type ArrayExample1 = Assignable<[1, 2], number[]>;  // true, because all elements of [1, 2] are numbers
@@ -22,16 +27,35 @@ export type TupleExample2 = Assignable<[string, number], [string, number]>; // t
 export type TupleExample3 = Assignable<[string, number], [string, number, boolean]>; // false
 
 // Primitive.
+// number
 export type PrimitiveExample1 = Assignable<1, number>;  // true, because 1 is a number
-export type PrimitiveExample2 = Assignable<'a', string>;  // true, because 'a' is a string
+export type PrimitiveExample2 = Assignable<number, 1>; // true
+// string
+export type PrimitiveExample3 = Assignable<'a', string>;  // true, because 'a' is a string
+export type PrimitiveExample4 = Assignable<string, 'a'>;  // true
+// boolean
+export type PrimitiveExample5 = Assignable<true, boolean>; // false
+export type PrimitiveExample6 = Assignable<boolean, true>; // false
+
+export type PrimitiveExample7 = Assignable<number, string>; // false
+export type PrimitiveExample8 = Assignable<any, number> // true
+export type PrimitiveExample9 = Assignable<number, any> // true
+export type PrimitiveExample10 = Assignable<never, number> // never - CHECK
+export type PrimitiveExample11 = Assignable<number, never> // never - CHECK
 
 // Object.
 export type ObjectExample1 = Assignable<{ name: string }, { name: string }>; // true
 export type ObjectExample2 = Assignable<{ name: string }, { age: number }>; // false
+
 export type ObjectExample3 = Assignable<{ name: string }, { name: string; age: number }>; // true
-export type ObjectExample4 = Assignable<{a:number, b:string}, {b:string, a:number}>; // true
-export type ObjectExample5 = Assignable<{a:number, b:string}, {b:string, a:number}>; // true
-export type ObjectExample6 = Assignable<{a:number, b:string}, {b:string, a:number}>; // true
+export type ObjectExample4 = Assignable<{ name: string; age: number }, { name: string }>; // true
+
+export type ObjectExample5 = Assignable<{a:number, b:string}, {b:string, a:number}>; // Differ order: true
+export type ObjectExample6 = Assignable<{b:string, a:number}, {b:string, a:number}>; // Same order: true
+
+export type ObjectExample7 = Assignable<{ a: number }, { a: number; b: string }>; // true
+export type ObjectExample8 = Assignable<{ a: number; b: string }, { a: number }>; // true
+export type ObjectExample9 = Assignable<{ a: number; b: string }, { b: string }>; // true
 
 // Nested Objects.
 export type NestedObjectExample1 = Assignable<{ user: { name: string } }, { user: { name: string } }>; // true, both have identical nested structure

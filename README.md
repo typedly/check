@@ -155,7 +155,7 @@ export type UnionExample4 = ExactEqual<string | number, number | string>; // tru
 export type UnionExample5 = ExactEqual<number | string, number | string>; // true / boolean / true
 ```
 
-[More examples](https://github.com/typedly/check/blob/main/src/test/exact-qual.spec.ts)
+[More examples](https://github.com/typedly/check/blob/main/src/test/exact-equal.spec.ts)
 
 ### `Mutual`
 

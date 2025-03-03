@@ -1,6 +1,5 @@
 /**
- * @description Determines the `A` is equal to `B`.
- * Mutual Assignability Without Boolean Enforcement.
+ * @description Determines if `A` and `B` are structurally identical by ensuring both `A extends B` and `B extends A`.
  * 
  * - ✓ To determine if two types are distributively equal.
  * - ✓ Checks if both types mutually extend each other: it checks if any member of `A` is assignable to `B` **AND** any member of `B` is assignable to `A`.
@@ -29,8 +28,9 @@
  * - ✓ Distributive(without tuple): Allows distribution over unions.
  * 
  * Strict:
- * - ✓ Non-strict(without tuple): Allows subtype/supertype compatibility.
- * - ✕ Strict(by using tuple): Ensures exact structural equality.
+ * - ✕ Non-strict(without tuple)(one direction): Allows subtype/supertype compatibility. 
+ * - ✓ Non-strict(without tuple) structural(both direction): Disallows subtype/supertype compatibility.
+ * - ✕ Strict(by using tuple) structural(both direction): Ensures exact structural equality.
  * - ✕ Strict(by using function return type): Ensures exact structural equality.
  * @export
  * @template A 

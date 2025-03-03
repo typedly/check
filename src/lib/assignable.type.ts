@@ -1,13 +1,11 @@
 /**
- * @description 
- * - Likely checks if one type includes another.
- * - Distributive check. Handles distribution over unions.
- * - It checks if any member of `A` is assignable to `B` OR any member of `B` is assignable to `A`.
- * - Less strict, subtype/supertype compatibility.
+ * @description Checks whether `A` can be assigned to `B` or vice versa, returning `true` if either condition is met, otherwise `false`.
  * 
- * - **Less/Loose compatible**.
- * - It's "less compatible" because it allows for partial compatibility.
- * - It doesn't require the entire structure of A to be perfectly aligned with B.
+ * - Checks if one type includes another.
+ * - Checks if any member of `A` is assignable to `B` OR any member of `B` is assignable to `A`.
+ * - Handles distribution over unions.
+ * - Allows subtype/supertype compatibility.
+ * - Supports partial compatibility, not requiring exact structure alignment.
  * 
  * Direction:
  * - ✓ One-direction: `A extends B OR B extends A`.
@@ -29,8 +27,9 @@
  * - ✓ Distributive(without tuple): Allows distribution over unions.
  * 
  * Strict:
- * - ✓ Non-strict(without tuple): Allows subtype/supertype compatibility.
- * - ✕ Strict(by using tuple): Ensures exact structural equality.
+ * - ✓ Non-strict(without tuple)(one direction): Allows subtype/supertype compatibility. 
+ * - ✕ Non-strict(without tuple) structural(both direction): Disallows subtype/supertype compatibility.
+ * - ✕ Strict(by using tuple) structural(both direction): Ensures exact structural equality.
  * - ✕ Strict(by using function return type): Ensures exact structural equality.
  * @export
  * @template A 

@@ -24,8 +24,9 @@
  * - ✕ Distributive(without tuple): Allows distribution over unions.
  * 
  * Strict:
- * - ✕ Non-strict(without tuple): Allows subtype/supertype compatibility.
- * - ✓ Strict(by using tuple): Ensures exact structural equality.
+ * - ✕ Non-strict(without tuple)(one direction): Allows subtype/supertype compatibility. 
+ * - ✕ Non-strict(without tuple) structural(both direction): Disallows subtype/supertype compatibility.
+ * - ✓ Strict(by using tuple) structural(both direction): Ensures exact structural equality.
  * - ✕ Strict(by using function return type): Ensures exact structural equality.
  * @export
  * @template A 

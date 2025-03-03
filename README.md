@@ -118,6 +118,8 @@ export type UnionExample4 = Assignable<string | number, number | string>; // tru
 export type UnionExample5 = Assignable<number | string, number | string>; // true
 ```
 
+[More examples](https://github.com/typedly/check/blob/main/src/test/assignable.spec.ts)
+
 ### `Equal`
 
 Determines if `A` and `B` are **structurally identical** by ensuring both `A extends B` and `B extends A`.
@@ -137,6 +139,8 @@ export type UnionExample4 = Equal<string | number, number | string>; // boolean
 export type UnionExample5 = Equal<number | string, number | string>; // boolean
 ```
 
+[More examples](https://github.com/typedly/check/blob/main/src/test/equal.spec.ts)
+
 ### `ExactEqual`
 
 ```typescript
@@ -150,6 +154,8 @@ export type UnionExample3 = ExactEqual<'a' | 'b', 'a' | 'b'>; // true / boolean 
 export type UnionExample4 = ExactEqual<string | number, number | string>; // true / boolean / true
 export type UnionExample5 = ExactEqual<number | string, number | string>; // true / boolean / true
 ```
+
+[More examples](https://github.com/typedly/check/blob/main/src/test/exact-equal.spec.ts)
 
 ### `Mutual`
 
@@ -171,6 +177,8 @@ export type UnionExample4 = Mutual<string | number, number | string>; // true
 export type UnionExample5 = Mutual<number | string, number | string>; // true
 ```
 
+[More examples](https://github.com/typedly/check/blob/main/src/test/mutual.spec.ts)
+
 ### `Same`
 
 Ensures exact equality by strictly **comparing function return types**.
@@ -186,6 +194,8 @@ export type UnionExample4 = Same<string | number, number | string>; // true
 export type UnionExample5 = Same<number | string, number | string>; // true
 ```
 
+[More examples](https://github.com/typedly/check/blob/main/src/test/same.spec.ts)
+
 ### `StrictAssignable`
 
 Checks whether `A` can be strictly(by using tuple wrapping) assigned to `B` or vice versa, returning `true` if either condition is met, otherwise `false`.
@@ -200,6 +210,8 @@ export type UnionExample3 = StrictAssignable<'a' | 'b', 'a' | 'b'>; // true
 export type UnionExample4 = StrictAssignable<string | number, number | string>; // true
 export type UnionExample5 = StrictAssignable<number | string, number | string>; // true
 ```
+
+[More examples](https://github.com/typedly/check/blob/main/src/test/strict-assignable.spec.ts)
 
 ### `StrictEqual`
 
@@ -222,6 +234,8 @@ export type UnionExample4 = StrictEqual<string | number, number | string>; // tr
 export type UnionExample5 = StrictEqual<number | string, number | string>; // true instead of boolean
 ```
 
+[More examples](https://github.com/typedly/check/blob/main/src/test/strict-equal.spec.ts)
+
 ### `StrictMutual`
 
 Determines if two types `A` and `B` are **strictly and mutually** equal.
@@ -241,6 +255,8 @@ export type UnionExample3 = StrictMutual<'a' | 'b', 'a' | 'b'>; // true
 export type UnionExample4 = StrictMutual<string | number, number | string>; // true
 export type UnionExample5 = StrictMutual<number | string, number | string>; // true
 ```
+
+[More examples](https://github.com/typedly/check/blob/main/src/test/strict-mutual.spec.ts)
 
 ## Contributing
 
@@ -323,8 +339,8 @@ MIT © typedly ([license][typedly-license])
 
 <!-- Package: typedly -->
   <!-- npm -->
-  [typedly-npm-badge-svg]: https://badge.fury.io/js/@typedly%2Fproject.svg
-  [typedly-npm-badge]: https://badge.fury.io/js/@typedly%2Fproject
+  [typedly-npm-badge-svg]: https://badge.fury.io/js/@typedly%2Fcheck.svg
+  [typedly-npm-badge]: https://badge.fury.io/js/@typedly%2Fcheck
 
 <!-- GIT -->
 [git-semver]: http://semver.org/

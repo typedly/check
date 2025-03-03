@@ -56,7 +56,51 @@ import {
 } from '@typedly/check';
 ```
 
+### Definitions
+
+**Boolean Ambiguity Prevention:**
+
+- Ensures that type check returns a definite `true` or `false` result, instead of `boolean` especially seen in cases involving union types or complex conditions.
+- When we use conditional types, like `A extends B ? (B extends A ?  true : false) : false`, it could lead to ambiguous results in certain scenarios, especially with unions.
+
+**Distributive Equality:**
+
+- It can be seen by using union type as the type parameter.
+- Distributive equality occurs when a type equality check is performed across each member of a union type.
+- If either or both of the types being compared are union types, the comparison is distributed over each individual member of the union.
+
+Example:
+
+`number | string` being checked against `string | number` will check `number` against `string`, `number` against `number`, `string` against `string`, and `string` against `number`.
+
+**Structural Equality:**
+
+- Ensures that two types have the exact same structure, including properties, types, and the order of those properties (in the case of objects).
+- Unlike subtype compatibility, where one type can be a more general form of another, structural equality requires that the types are identical in structure.
+
+Example:
+
+`{ a: number; b: string }` and `{ b: string; a: number }` are structurally equal.
+
+**Strict Equality:**
+
+- Enforced using the tuple `[A]` and `[B]`.
+- Disallows subtype/supertype compatibility.
+- Both types need to have the same properties, the same number of properties, and the same order of properties.
+
+Example:
+
+`[1, 2]` is strictly equal to `[1, 2]`, but not to `[2, 1]`. `number | string` is not strictly equal to `string | number` when using a non distributing equality check.
+
 ### `Assignable`
+
+Checks whether `A` can be assigned to `B` or vice versa, returning `true` if either condition is met, otherwise `false`.
+
+- Checks if **one type includes another**.
+- Checks if any member of `A` is assignable to `B` or vice versa.
+- Handles distribution over unions (distributive check).
+- Allows **subtype/supertype compatibility**.
+- Supports **partial compatibility**, not requiring exact structure alignment.
 
 ```typescript
 import { Assignable } from '@typedly/check';
@@ -70,6 +114,12 @@ export type UnionExample5 = Assignable<number | string, number | string>; // tru
 ```
 
 ### `Equal`
+
+Determines if `A` and `B` are **structurally identical** by ensuring both `A extends B` and `B extends A`.
+
+- Ensures **every** member of `A` is assignable to `B` and vice versa.
+- **Does not** ensure full correctness due to potential `boolean` ambiguity with union types.
+- Disallows **subtype/supertype compatibility** by requiring exact structural equality.
 
 ```typescript
 import { Equal } from '@typedly/check';
@@ -97,6 +147,13 @@ export type UnionExample5 = ExactEqual<number | string, number | string>; // tru
 ```
 
 ### `Mutual`
+
+Determines if two types `A` and `B` are **mutually** equal preventing `boolean` ambiguity.
+
+- Checks if **every** member of `A` is assignable to `B` and vice versa.
+- Ensures a **definite `true` or `false` result**, avoiding `boolean` ambiguity in union types.
+- Handles distribution over unions, ensuring correctness in cases like `A | B`. (distributive check)
+- **Structural equality check** — requires the exact same structure, not just subtype compatibility.
 
 ```typescript
 import { Mutual } from '@typedly/check';
@@ -150,6 +207,13 @@ export type UnionExample5 = StrictEqual<number | string, number | string>; // tr
 ```
 
 ### `StrictMutual`
+
+Determines if two types `A` and `B` are **strictly and mutually** equal.
+
+- Ensures that both types mutually extend each other: Checks if **every** member of `A` is assignable to `B` **and every** member of `B` is assignable to `A`.
+- Guarantees a **definite `true` or `false` result**, avoiding `boolean` ambiguity.
+- **Prevents distribution behavior**: no distribution over unions.
+- **Strict(by using tuple)** structural(both direction): Ensures exact structural equality in both directions.
 
 ```typescript
 import { StrictMutual } from '@typedly/check';

@@ -93,7 +93,7 @@ Example:
 `[1, 2]` is strictly equal to `[1, 2]`, but not to `[2, 1]`. `number | string` is not strictly equal to `string | number` when using a non distributing equality check.
 
 > [!NOTE]
-> TypeScript's type system currently doesn't support full strict object equality (including key order) directly.
+> It seems TypeScript's type system currently doesn't support full strict object equality (including key order) directly.
 > If you're working with objects, you can check for strict structure, but not necessarily key order or exact value assignment without additional constraints or custom logic.
 
 ### `Assignable`

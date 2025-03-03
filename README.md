@@ -339,8 +339,8 @@ MIT © typedly ([license][typedly-license])
 
 <!-- Package: typedly -->
   <!-- npm -->
-  [typedly-npm-badge-svg]: https://badge.fury.io/js/@typedly%2Fproject.svg
-  [typedly-npm-badge]: https://badge.fury.io/js/@typedly%2Fproject
+  [typedly-npm-badge-svg]: https://badge.fury.io/js/@typedly%2Fcheck.svg
+  [typedly-npm-badge]: https://badge.fury.io/js/@typedly%2Fcheck
 
 <!-- GIT -->
 [git-semver]: http://semver.org/

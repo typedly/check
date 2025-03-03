@@ -92,6 +92,10 @@ Example:
 
 `[1, 2]` is strictly equal to `[1, 2]`, but not to `[2, 1]`. `number | string` is not strictly equal to `string | number` when using a non distributing equality check.
 
+> [!NOTE]
+> TypeScript's type system currently doesn't support full strict object equality (including key order) directly.
+> If you're working with objects, you can check for strict structure, but not necessarily key order or exact value assignment without additional constraints or custom logic.
+
 ### `Assignable`
 
 Checks whether `A` can be assigned to `B` or vice versa, returning `true` if either condition is met, otherwise `false`.
@@ -151,7 +155,7 @@ export type UnionExample5 = ExactEqual<number | string, number | string>; // tru
 Determines if two types `A` and `B` are **mutually** equal preventing `boolean` ambiguity.
 
 - Checks if **every** member of `A` is assignable to `B` and vice versa.
-- Ensures a **definite `true` or `false` result**, avoiding `boolean` ambiguity in union types.
+- **Ensures** a **definite `true` or `false` result**, avoiding `boolean` ambiguity in union types.
 - Handles distribution over unions, ensuring correctness in cases like `A | B`. (distributive check)
 - **Structural equality check** — requires the exact same structure, not just subtype compatibility.
 
@@ -168,6 +172,8 @@ export type UnionExample5 = Mutual<number | string, number | string>; // true
 
 ### `Same`
 
+Ensures exact equality by strictly **comparing function return types**.
+
 ```typescript
 import { Same } from '@typedly/check';
 
@@ -181,6 +187,8 @@ export type UnionExample5 = Same<number | string, number | string>; // true
 
 ### `StrictAssignable`
 
+Checks whether `A` can be strictly(by using tuple wrapping) assigned to `B` or vice versa, returning `true` if either condition is met, otherwise `false`.
+
 ```typescript
 import { StrictAssignable } from '@typedly/check';
 
@@ -193,6 +201,13 @@ export type UnionExample5 = StrictAssignable<number | string, number | string>; 
 ```
 
 ### `StrictEqual`
+
+Determines if two types `A` and `B` are **strictly** equal.
+
+- Ensures both types mutually extend each other: it checks if **every** member of `A` is assignable to `B` **and every** member of `B` is assignable to `A`.
+- **Ensures** a **definite `true` or `false` result**, avoiding `boolean` ambiguity.
+- **Prevents distribution behavior**: no distribution over unions.
+- **Strict(by using tuple)** structural(both direction): Ensures exact structural equality in both directions.
 
 ```typescript
 import { StrictEqual } from '@typedly/check';
@@ -211,7 +226,7 @@ export type UnionExample5 = StrictEqual<number | string, number | string>; // tr
 Determines if two types `A` and `B` are **strictly and mutually** equal.
 
 - Ensures that both types mutually extend each other: Checks if **every** member of `A` is assignable to `B` **and every** member of `B` is assignable to `A`.
-- Guarantees a **definite `true` or `false` result**, avoiding `boolean` ambiguity.
+- **Guarantees** a **definite `true` or `false` result**, avoiding `boolean` ambiguity.
 - **Prevents distribution behavior**: no distribution over unions.
 - **Strict(by using tuple)** structural(both direction): Ensures exact structural equality in both directions.
 

@@ -1,5 +1,6 @@
 /**
- * @description
+ * @description Checks whether `A` can be strictly(by using tuple) assigned to `B` or vice versa, returning `true` if either condition is met, otherwise `false`.
+ * 
  * - This type checks for assignability in a Non-distributive (structural) manner.
  * - It checks if the entire type `A` is assignable to `B` OR the entire type `B` is assignable to `A`.
  * - This means that A and B must have the same overall structure to return `true`.

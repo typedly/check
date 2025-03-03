@@ -6,7 +6,7 @@
  * - Ensures structural assignability.
  * - Ensures deep structure match.
  * 
- * - ✓ Checks if both types mutually extend each other: it checks if any member of `A` is assignable to `B` **AND** any member of `B` is assignable to `A`.
+ * - ✓ Ensures both types mutually extend each other: it checks if any member of `A` is assignable to `B` **AND** any member of `B` is assignable to `A`.
  * - ✕ Ensures a **definite `true` or `false` result**, avoiding `boolean` ambiguity. 
  * 
  * Direction:
